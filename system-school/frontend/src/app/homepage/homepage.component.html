@@ -1,0 +1,100 @@
+<div class="dark bg-gray-900 text-white">
+    <div class="flex flex-col justify-center items-center h-screen bg-gray-900 text-white py-12 sm:py-0" id="home">
+      <h1 class="text-4xl sm:text-6xl font-bold mb-6">Welcome To ENSET Registration</h1>
+      <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto text-center justify-between leading-relaxed">
+        The official platform for applying to the engineering cycle admission competition at ENSET Mohammedia. Simplify your application process by completing your dossier online and easily track your progress. Join us to benefit from top-notch training in various engineering fields.      
+      </p> <br>
+      <div class="flex space-x-4">
+        <button class="bg-indigo-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          routerLink="/form">
+          Register
+        </button>
+      </div>
+    </div>
+  
+    <hr class="w-1/2 mx-auto my-9">
+    <!-- ABOUT SECTION -->
+    <div class="bg-white dark:bg-gray-900" id="about">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+          <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">About Engineering Cycle</h2>
+          <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Best Choice For your future</h2>
+        </div>
+    
+        <div class="mt-10 flex flex-col md:flex-row items-center md:items-start">
+          <div class="relative w-full md:w-1/2">
+            <img src="../../assets/ranking.jpeg" alt="" class="w-[60%] h-auto">
+          </div>
+          <div class="w-full md:w-1/2 mt-6 md:mt-0 md:pl-8">
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+              The engineering cycle at ENSET Mohammedia is a comprehensive educational program spanning four to five years. It combines theoretical coursework with hands-on practical training, research projects, and industrial internships in various engineering disciplines. The curriculum emphasizes practical application, problem-solving skills, and soft skills such as communication and leadership. Students are encouraged to innovate and contribute to research, preparing them for successful careers in industry, research, academia, or entrepreneurship.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  
+    <hr class="w-1/2 mx-auto my-9">
+  
+    <!-- CONTACT SECTION -->
+    <section class="bg-white dark:bg-gray-900" id="contact">
+      <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
+        <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue?
+          Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
+        <form [formGroup]="emailForm" (ngSubmit)="sendEmail()" class="space-y-6">
+          <div class="form-group">
+            <label for="from_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your
+              name</label>
+            <input type="text" formControlName="from_name" id="from_name"
+              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="FirstName LastName" required>
+            <span *ngIf="emailForm.controls['from_name'].errors?.['required'] && emailForm.controls['from_name'].touched"
+              class="text-red-500 text-xs mt-1">Name is required</span>
+          </div>
+          <div class="form-group">
+            <label for="from_email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your
+              email</label>
+            <input type="email" formControlName="from_email" id="from_email"
+              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="name@enset.com" required>
+            <span
+              *ngIf="emailForm.controls['from_email'].errors?.['required'] && emailForm.controls['from_email'].touched"
+              class="text-red-500 text-xs mt-1">Email is required</span>
+            <span *ngIf="emailForm.controls['from_email'].errors?.['email'] && emailForm.controls['from_email'].touched"
+              class="text-red-500 text-xs mt-1">Please enter a valid email</span>
+          </div>
+          <div class="form-group">
+            <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
+            <input type="text" formControlName="subject" id="subject"
+              class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Let us know how we can help you" required>
+            <span *ngIf="emailForm.controls['subject'].errors?.['required'] && emailForm.controls['subject'].touched"
+              class="text-red-500 text-xs mt-1">Subject is required</span>
+          </div>
+          <div class="form-group sm:col-span-2">
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your
+              message</label>
+            <textarea formControlName="message" id="message" rows="6"
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Leave a comment..."></textarea>
+            <span *ngIf="emailForm.controls['message'].errors?.['required'] && emailForm.controls['message'].touched"
+              class="text-red-500 text-xs mt-1">Message is required</span>
+          </div>
+          <div class="flex justify-center">
+            <button [disabled]="!emailForm.valid" type="submit"
+              class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+              <span
+                class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                <span class="relative z-10">{{ isLoading ? 'Sending...' : 'Send Message' }}</span>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  
+  
+  </div>
