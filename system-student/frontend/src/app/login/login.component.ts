@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit{
 
   constructor(private fb : FormBuilder,
               private router : Router,
-              private http : HttpClient) { }
+              private http : HttpClient,
+            private authService:AuthService) { }
 
   ngOnInit() {
     this.formLogin=this.fb.group({
@@ -25,12 +26,13 @@ export class LoginComponent implements OnInit{
   }
 
   handleLogin() {
-    this.http.post('http://localhost:port/login', this.formLogin.getRawValue(), {
-      withCredentials: true
-    }).subscribe((response: any) => {
-      if (response.role === 'TEACHER') {
+    let cni = this.formLogin.get('cni')?.value;
+    let password = this.formLogin.get('password')?.value;
+    this.authService.login(cni,password).then((user: any) => {
+      console.log(user.role)
+      if (user.role === 'teacher') {
         this.router.navigate(['/teacher']);
-      } else if (response.role === 'STUDENT') {
+      } else if (user.role === 'student') {
         this.router.navigate(['/student']);
       }
     });

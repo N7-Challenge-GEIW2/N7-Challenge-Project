@@ -12,9 +12,9 @@ export class AppStateService {
 
   public authState :any ={
     isAuthenticated : false,
-    cni : undefined,
-    roles : undefined,
-    token : undefined
+    cni : "",
+    roles : "",
+    token : ""
   }
 
   constructor() { }

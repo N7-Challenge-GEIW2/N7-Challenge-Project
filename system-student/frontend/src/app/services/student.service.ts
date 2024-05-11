@@ -7,7 +7,7 @@ import {Student} from "../model/student.model";
   providedIn: 'root'
 })
 export class StudentService {
-  private host : string ="http://localhost:port";
+  private host : string ="http://localhost:3000";
   constructor(private http: HttpClient) { }
 
   public getStudents(){
