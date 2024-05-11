@@ -1,0 +1,18 @@
+<nav class="p-3 navbar">
+  <ul class="nav nav-pills">
+    <li *ngIf="loadingService.isLoading$ | async">
+      <div class="spinner-border text-primary ms-2" role="status">
+      </div>
+    </li>
+  </ul>
+  &nbsp;
+  <ul class="nav nav-pills">
+    <li *ngIf="appState.authState.isAuthenticated">
+      {{appState.authState.username}}
+      <button class="btn btn-success" (click)="logout()">Logout</button>
+    </li>
+    <li *ngIf="!appState.authState.isAuthenticated">
+      <button class="btn btn-success" (click)="login()">Login</button>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<div class="p-3">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="studentForm" (ngSubmit)="saveStudent()">
+            <div class="mb-3">
+              <label class="form-label">CNE : </label>
+              <input class="form-control" formControlName="cne" placeholder="Enter CNE">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Major : </label>
+              <input class="form-control" formControlName="major" placeholder="Enter Major">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">School Name : </label>
+              <input class="form-control" formControlName="schoolname" placeholder="Enter School Name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Degree type : </label>
+              <select class="form-select" formControlName="degreeType" (change)="onDegreeTypeChange($event.target.value)">
+                <option value="DEUG">DEUG</option>
+                <option value="DEUST">DEUST</option>
+                <option value="DUT">DUT</option>
+                <option value="LICENCE">LICENCE</option>
+              </select>
+            </div>
+            <div class="mb-3" *ngIf="showSemesterFields()">
+              <label class="form-label">Semester1 Grade : </label>
+              <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
+            </div>
+            <div class="mb-3" *ngIf="showSemesterFields()">
+              <label class="form-label">Semester2 Grade : </label>
+              <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
+            </div>
+            <div class="mb-3" *ngIf="showSemesterFields()">
+              <label class="form-label">Semester3 Grade : </label>
+              <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
+            </div>
+            <div class="mb-3" *ngIf="showSemesterFields()">
+              <label class="form-label">Semester4 Grade : </label>
+              <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
+            </div>
+            <div class="mb-3" *ngIf="showSemesterFields()">
+              <label class="form-label">Semester5 Grade : </label>
+              <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
+            </div>
+            <div class="mb-3" *ngIf="showSemesterFields()">
+              <label class="form-label">Semester6 Grade : </label>
+              <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
+            </div>
+            <button [disabled]="studentForm.invalid" type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-app-errors></app-app-errors>
+<router-outlet>
+
+</router-outlet>
