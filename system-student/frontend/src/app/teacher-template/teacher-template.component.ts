@@ -11,14 +11,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TeacherTemplateComponent implements OnInit {
   public studentForm!: FormGroup;
-<<<<<<< HEAD
-  public showAllSemesterFields: boolean = false;
-  imageUrl: string | null = null;
-  extractedText: string = '';
-=======
   public showFourSemesterFields: boolean = false;
   public showSixSemesterFields: boolean = false;
->>>>>>> f5aa57f410b01ea79b316bf9f7c126b55e8eac10
+
+  public extractedText: string = ''; // Propriété pour stocker le texte extrait
+  public imageUrl?: string; // Optional property to store image URL (can be null)
 
   constructor(private formBuilder: FormBuilder, private studentService: StudentService, private http: HttpClient) { }
 
@@ -33,9 +30,7 @@ export class TeacherTemplateComponent implements OnInit {
       semester3: this.formBuilder.control(0, [Validators.required]),
       semester4: this.formBuilder.control(0, [Validators.required]),
       semester5: this.formBuilder.control(0, [Validators.required]),
-      semester6: this.formBuilder.control(0, [Validators.required]),
-      extractedText: this.formBuilder.control('')  // Ajoutez le contrôle extractedText
-
+      semester6: this.formBuilder.control(0, [Validators.required])
     });
   }
 
@@ -60,8 +55,7 @@ export class TeacherTemplateComponent implements OnInit {
       this.studentForm.get('semester2')?.reset();
       this.studentForm.get('semester3')?.reset();
       this.studentForm.get('semester4')?.reset();
-    }
-    else if(this.showSixSemesterFields) {
+    } else if(this.showSixSemesterFields) {
       this.studentForm.get('semester1')?.reset();
       this.studentForm.get('semester2')?.reset();
       this.studentForm.get('semester3')?.reset();
@@ -94,15 +88,19 @@ export class TeacherTemplateComponent implements OnInit {
     fileInput.click();
   }
 
-  uploadImage(formData: FormData): void {
-    this.http.post<{ extracted_text: string; image_base64: string }>('http://localhost:5000/upload', formData).subscribe(
+  uploadImage(formData: FormData) {
+    this.http.post<any>('http://localhost:5000/upload', formData).subscribe(
       (response) => {
+        console.log('Texte extrait:', response.extracted_text);
         this.imageUrl = 'data:image/png;base64,' + response.image_base64;
-        this.studentForm.get('extractedText')?.setValue(response.extracted_text);  // Mettre à jour le texte extrait dans le formulaire
+        this.extractedText = response.extracted_text; // Mettre à jour le texte extrait
+        // console.log(this.extractedText);
       },
       (error) => {
         console.error('Échec du téléchargement:', error);
       }
     );
-}
-}
+  }
+  
+  }
+  

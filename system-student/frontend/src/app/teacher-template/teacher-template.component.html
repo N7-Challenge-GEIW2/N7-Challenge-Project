@@ -1,50 +1,4 @@
 <app-navbar></app-navbar>
-<<<<<<< HEAD
-<div class="container mt-4">
-  <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-6">
-          <form [formGroup]="studentForm" (ngSubmit)="saveStudent()">
-            <div class="mb-3">
-              <label class="form-label">CNE : </label>
-              <input class="form-control" formControlName="cne" placeholder="Enter CNE">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Major : </label>
-              <input class="form-control" formControlName="major" placeholder="Enter Major">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">School Name : </label>
-              <input class="form-control" formControlName="schoolName" placeholder="Enter School Name">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Degree type : </label>
-              <select class="form-select" formControlName="degreeType" (change)="onDegreeTypeChange($event)">
-                <option value="DEUG">DEUG</option>
-                <option value="DEUST">DEUST</option>
-                <option value="DUT">DUT</option>
-                <option value="LICENCE">LICENCE</option>
-              </select>
-            </div>
-            <div class="mb-3" *ngIf="showSemesterFields()">
-              <label class="form-label">Semester1 Grade : </label>
-              <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
-            </div>
-            <!-- Ajoutez d'autres champs de formulaire ici -->
-
-            <div class="mb-3">
-              <textarea class="form-control" rows="5" placeholder="Texte extrait" formControlName="extractedText" readonly style="color: black;">{{ extractedText }}</textarea>
-            </div>
-            <div class="mb-3">
-              <img [src]="imageUrl" *ngIf="imageUrl" alt="Image avec rectangles et textes encadrés en couleur" class="img-fluid img-thumbnail">
-            </div>
-            <button [disabled]="studentForm.invalid" type="submit" class="btn btn-primary">Save</button>
-            <button class="btn btn-primary mb-3" (click)="onUploadClick()">Upload</button>
-          </form>
-        </div>
-=======
-
 <div class="container-fluid">
   <div class="container">
     <div class="row">
@@ -61,7 +15,6 @@
                 <label class="form-label">CNE</label>
                 <input class="form-control" formControlName="cne" placeholder="Enter CNE">
               </div>
-
             </div>
             <div class="form-row row">
               <div class="col-md-12">
@@ -72,7 +25,7 @@
             <div class="form-row row">
               <div class="col-md-12">
                 <label class="form-label">School Name</label>
-                <input class="form-control" formControlName="schoolname" placeholder="Enter School Name">
+                <input class="form-control" formControlName="schoolName" placeholder="Enter School Name">
               </div>
             </div>
 
@@ -141,24 +94,23 @@
             </div>
             <div class="form-row row">
               <div class="col-md-12">
-                <button [disabled]="studentForm.invalid" type="submit" class="btn btn-primary w-100">Save</button>
+                <div class="mb-3">
+                  <textarea id="message" formControlName="extractedText" readonly rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Extracted Text ...">
+                    {{ extractedText }}
+                  </textarea>
+                  
+
+                <img [src]="imageUrl" *ngIf="imageUrl" alt="Image avec rectangles et textes encadrés en couleur" class="img-fluid img-thumbnail">
+              </div>
+                <button [disabled]="studentForm.invalid" type="submit" class="btn btn-primary w-50">Save</button>
+                <button class="btn btn-primary w-50" (click)="onUploadClick()">Upload</button>
               </div>
             </div>
           </div>
         </form>
->>>>>>> f5aa57f410b01ea79b316bf9f7c126b55e8eac10
       </div>
     </div>
   </div>
 </div>
-<<<<<<< HEAD
 <app-app-errors></app-app-errors>
 <router-outlet></router-outlet>
-=======
-
-
-<app-app-errors></app-app-errors>
-<router-outlet>
-
-</router-outlet>
->>>>>>> f5aa57f410b01ea79b316bf9f7c126b55e8eac10
