@@ -8,7 +8,7 @@
   &nbsp;
   <ul class="nav nav-pills">
     <li *ngIf="appState.authState.isAuthenticated">
-      {{appState.authState.username}}
+      {{appState.authState.cni}}
       <button class="btn btn-success" (click)="logout()">Logout</button>
     </li>
     <li *ngIf="!appState.authState.isAuthenticated">

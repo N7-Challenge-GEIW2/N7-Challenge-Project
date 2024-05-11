@@ -7,21 +7,27 @@
         <thead>
         <tr>
           <th class="text-center">CNE</th>
+          <th class="text-center">CNI</th>
           <th class="text-center">Major</th>
           <th class="text-center">Semester1</th>
           <th class="text-center">Semester2</th>
           <th class="text-center">Semester3</th>
           <th class="text-center">Semester4</th>
+          <th class="text-center">Semester5</th>
+          <th class="text-center">Semester6</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let student of students">
           <td class="text-center">{{student.cne}}</td>
+          <td class="text-center">{{student.cni}}</td>
           <td class="text-center">{{student.major}}</td>
           <td class="text-center">{{student.semester1}}</td>
           <td class="text-center">{{student.semester2}}</td>
           <td class="text-center">{{student.semester3}}</td>
           <td class="text-center">{{student.semester4}}</td>
+          <td class="text-center">{{student.semester5}}</td>
+          <td class="text-center">{{student.semester6}}</td>
         </tr>
         </tbody>
       </table>
