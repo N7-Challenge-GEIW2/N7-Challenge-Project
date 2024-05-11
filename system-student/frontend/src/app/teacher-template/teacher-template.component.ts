@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 export class TeacherTemplateComponent implements OnInit {
   public studentForm!: FormGroup;
   public showAllSemesterFields: boolean = false;
+  imageUrl: string | null = null;
+  extractedText: string = '';
 
   constructor(private formBuilder: FormBuilder, private studentService: StudentService, private http: HttpClient) { }
 
@@ -26,7 +28,9 @@ export class TeacherTemplateComponent implements OnInit {
       semester3: this.formBuilder.control(0, [Validators.required]),
       semester4: this.formBuilder.control(0, [Validators.required]),
       semester5: this.formBuilder.control(0, [Validators.required]),
-      semester6: this.formBuilder.control(0, [Validators.required])
+      semester6: this.formBuilder.control(0, [Validators.required]),
+      extractedText: this.formBuilder.control('')  // Ajoutez le contrôle extractedText
+
     });
   }
 
@@ -35,7 +39,8 @@ export class TeacherTemplateComponent implements OnInit {
     this.studentService.saveStudent(student).subscribe({
       next: data => {
         alert(JSON.stringify(data));
-      }, error: error => {
+      },
+      error: error => {
         console.log(error);
       }
     });
@@ -53,6 +58,7 @@ export class TeacherTemplateComponent implements OnInit {
   showSemesterFields() {
     return this.showAllSemesterFields || false;
   }
+
   onUploadClick() {
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
@@ -68,17 +74,15 @@ export class TeacherTemplateComponent implements OnInit {
     fileInput.click();
   }
 
-  uploadImage(formData: FormData) {
-    this.http.post<any>('http://localhost:5000/upload', formData).subscribe(
+  uploadImage(formData: FormData): void {
+    this.http.post<{ extracted_text: string; image_base64: string }>('http://localhost:5000/upload', formData).subscribe(
       (response) => {
-        // Afficher le texte extrait dans la console
-        console.log('Texte extrait:', response.extracted_text);
+        this.imageUrl = 'data:image/png;base64,' + response.image_base64;
+        this.studentForm.get('extractedText')?.setValue(response.extracted_text);  // Mettre à jour le texte extrait dans le formulaire
       },
       (error) => {
-        // Gérer l'erreur
         console.error('Échec du téléchargement:', error);
       }
     );
-  }
-  
+}
 }

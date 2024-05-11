@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
-
-<div class="p-3">
+<div class="container mt-4">
   <div class="card">
     <div class="card-body">
       <div class="row">
@@ -31,36 +30,21 @@
               <label class="form-label">Semester1 Grade : </label>
               <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
             </div>
-            <div class="mb-3" *ngIf="showSemesterFields()">
-              <label class="form-label">Semester2 Grade : </label>
-              <input class="form-control" formControlName="semester2" placeholder="Enter Grade">
+            <!-- Ajoutez d'autres champs de formulaire ici -->
+
+            <div class="mb-3">
+              <textarea class="form-control" rows="5" placeholder="Texte extrait" formControlName="extractedText" readonly style="color: black;">{{ extractedText }}</textarea>
             </div>
-            <div class="mb-3" *ngIf="showSemesterFields()">
-              <label class="form-label">Semester3 Grade : </label>
-              <input class="form-control" formControlName="semester3" placeholder="Enter Grade">
-            </div>
-            <div class="mb-3" *ngIf="showSemesterFields()">
-              <label class="form-label">Semester4 Grade : </label>
-              <input class="form-control" formControlName="semester4" placeholder="Enter Grade">
-            </div>
-            <div class="mb-3" *ngIf="showSemesterFields()">
-              <label class="form-label">Semester5 Grade : </label>
-              <input class="form-control" formControlName="semester5" placeholder="Enter Grade">
-            </div>
-            <div class="mb-3" *ngIf="showSemesterFields()">
-              <label class="form-label">Semester6 Grade : </label>
-              <input class="form-control" formControlName="semester6" placeholder="Enter Grade">
+            <div class="mb-3">
+              <img [src]="imageUrl" *ngIf="imageUrl" alt="Image avec rectangles et textes encadrés en couleur" class="img-fluid img-thumbnail">
             </div>
             <button [disabled]="studentForm.invalid" type="submit" class="btn btn-primary">Save</button>
             <button class="btn btn-primary mb-3" (click)="onUploadClick()">Upload</button>
-
           </form>
-          
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <app-app-errors></app-app-errors>
 <router-outlet></router-outlet>
