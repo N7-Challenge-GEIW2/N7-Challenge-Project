@@ -10,7 +10,8 @@ import { Student } from '../model/student.model';
 })
 export class TeacherTemplateComponent implements OnInit {
   public studentForm!: FormGroup;
-  public showAllSemesterFields: boolean = false;
+  public showFourSemesterFields: boolean = false;
+  public showSixSemesterFields: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private studentService: StudentService) { }
 
@@ -42,14 +43,29 @@ export class TeacherTemplateComponent implements OnInit {
 
   onDegreeTypeChange(event: Event) {
     let value = (event.target as HTMLInputElement).value;
-    this.showAllSemesterFields = (value === 'LICENCE');
-    if (!this.showAllSemesterFields) {
+    this.showFourSemesterFields = (value == 'DEUG' || value == 'DEUST' || value == 'DUT');
+    this.showSixSemesterFields = (value == 'LICENCE');
+    if (this.showFourSemesterFields) {
+      this.studentForm.get('semester1')?.reset();
+      this.studentForm.get('semester2')?.reset();
+      this.studentForm.get('semester3')?.reset();
+      this.studentForm.get('semester4')?.reset();
+    }
+    else if(this.showSixSemesterFields) {
+      this.studentForm.get('semester1')?.reset();
+      this.studentForm.get('semester2')?.reset();
+      this.studentForm.get('semester3')?.reset();
+      this.studentForm.get('semester4')?.reset();
       this.studentForm.get('semester5')?.reset();
       this.studentForm.get('semester6')?.reset();
     }
   }
 
-  showSemesterFields() {
-    return this.showAllSemesterFields || false;
+  showSemesterFields1() {
+    return this.showFourSemesterFields || false;
+  }
+
+  showSemesterFields2() {
+    return this.showSixSemesterFields || false;
   }
 }
