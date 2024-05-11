@@ -8,15 +8,16 @@ import {jwtDecode} from "jwt-decode";
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http : HttpClient, private appState : AppStateService) { }
+  constructor(private http : HttpClient,
+              private appState : AppStateService) { }
 
-  async login(username : string, cni : string){
-    let user:any= await firstValueFrom(this.http.get("http://localhost:port/users/"+username));
-    if(cni==atob(user.cni)){
+  async login(cni : string, password : string){
+    let user:any= await firstValueFrom(this.http.post("http://localhost:port/users", {cni}));
+    if(password==atob(user.password)){
       let decodedJwt:any = jwtDecode(user.token);
       this.appState.setAuthState({
         isAuthenticated : true,
-        username : decodedJwt.sub,
+        cni : decodedJwt.sub,
         roles : decodedJwt.roles,
         token : user.token
       });

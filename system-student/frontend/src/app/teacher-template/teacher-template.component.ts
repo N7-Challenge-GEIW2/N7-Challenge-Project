@@ -40,7 +40,8 @@ export class TeacherTemplateComponent implements OnInit {
     });
   }
 
-  onDegreeTypeChange(value: string) {
+  onDegreeTypeChange(event: Event) {
+    let value = (event.target as HTMLInputElement).value;
     this.showAllSemesterFields = (value === 'LICENCE');
     if (!this.showAllSemesterFields) {
       this.studentForm.get('semester5')?.reset();
