@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +14,7 @@ export class LoginComponent implements OnInit{
 
   constructor(private fb : FormBuilder,
               private router : Router,
-              private http : HttpClient) { }
+              private authService : AuthService) { }
 
   ngOnInit() {
     this.formLogin=this.fb.group({
@@ -25,15 +24,14 @@ export class LoginComponent implements OnInit{
   }
 
   handleLogin() {
-    this.http.post('http://localhost:port/login', this.formLogin.getRawValue(), {
-      withCredentials: true
-    }).subscribe((response: any) => {
-      if (response.role === 'TEACHER') {
-        this.router.navigate(['/teacher']);
-      } else if (response.role === 'STUDENT') {
-        this.router.navigate(['/student']);
-      }
-    });
+    let cni=this.formLogin.value.cni;
+    let password=this.formLogin.value.password;
+    this.authService.login(cni, password)
+      .then(resp=>{
+        this.router.navigateByUrl("/teacher");
+      })
+      .catch(error=>{
+        this.errorMessage=error;
+      })
   }
-
 }
