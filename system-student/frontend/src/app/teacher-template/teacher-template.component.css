@@ -1,0 +1,30 @@
+.session-title {
+  padding: 30px;
+  margin: 0px;
+}
+.session-title h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+}
+.session-title p {
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.cf-container .form-row {
+  margin-bottom: 20px;
+}
+.cf-container .form-row label {
+  font-weight: 600;
+  font-size: 0.93rem;
+  margin-bottom: 4px;
+}
+.cf-container .form-row .form-control {
+  border-radius: 0px;
+  background-color: rgba(234, 233, 233, 0.78);
+}
+.cf-container .agre p {
+  font-size: 0.9rem;
+}

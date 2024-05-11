@@ -11,9 +11,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TeacherTemplateComponent implements OnInit {
   public studentForm!: FormGroup;
+<<<<<<< HEAD
   public showAllSemesterFields: boolean = false;
   imageUrl: string | null = null;
   extractedText: string = '';
+=======
+  public showFourSemesterFields: boolean = false;
+  public showSixSemesterFields: boolean = false;
+>>>>>>> f5aa57f410b01ea79b316bf9f7c126b55e8eac10
 
   constructor(private formBuilder: FormBuilder, private studentService: StudentService, private http: HttpClient) { }
 
@@ -48,15 +53,30 @@ export class TeacherTemplateComponent implements OnInit {
 
   onDegreeTypeChange(event: Event) {
     let value = (event.target as HTMLInputElement).value;
-    this.showAllSemesterFields = (value === 'LICENCE');
-    if (!this.showAllSemesterFields) {
+    this.showFourSemesterFields = (value == 'DEUG' || value == 'DEUST' || value == 'DUT');
+    this.showSixSemesterFields = (value == 'LICENCE');
+    if (this.showFourSemesterFields) {
+      this.studentForm.get('semester1')?.reset();
+      this.studentForm.get('semester2')?.reset();
+      this.studentForm.get('semester3')?.reset();
+      this.studentForm.get('semester4')?.reset();
+    }
+    else if(this.showSixSemesterFields) {
+      this.studentForm.get('semester1')?.reset();
+      this.studentForm.get('semester2')?.reset();
+      this.studentForm.get('semester3')?.reset();
+      this.studentForm.get('semester4')?.reset();
       this.studentForm.get('semester5')?.reset();
       this.studentForm.get('semester6')?.reset();
     }
   }
 
-  showSemesterFields() {
-    return this.showAllSemesterFields || false;
+  showSemesterFields1() {
+    return this.showFourSemesterFields || false;
+  }
+
+  showSemesterFields2() {
+    return this.showSixSemesterFields || false;
   }
 
   onUploadClick() {
