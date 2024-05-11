@@ -13,11 +13,10 @@ mongoose.connect("mongodb+srv://blockchain:blockchain@cluster.nszsxvk.mongodb.ne
 app.use(cookieParser())
 app.use(cors({
     credentials:true,
-    origin:["*"]
-    
+    origin:["http://localhost:4200"],    
 }))
 app.use(express.json());
-app.use("/api",authRouter)
+app.use("/",authRouter)
 
 // Start the server
 const PORT = process.env.PORT || 3000;

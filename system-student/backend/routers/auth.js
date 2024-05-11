@@ -6,7 +6,7 @@ const jwt=require("jsonwebtoken")
 router.post('/register',async  (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    const newUser = new user({ name: req.body.name, email: req.body.email, password: hashedPassword });
+    const newUser = new user({ cni: req.body.cni, password: hashedPassword, role: req.body.role});
     const result=await newUser.save()
     const {password,...others}=await result.toJSON()
     res.send(others);
@@ -15,7 +15,7 @@ router.post('/register',async  (req, res) => {
 
 router.post('/login',async (req, res) => {
 
-    const user1 = await user.findOne({ email: req.body.email });
+    const user1 = await user.findOne({ cni: req.body.cni });
     if(!user1){
         return res.status(404).send({
             message:"Wrong Credentials"
@@ -27,13 +27,13 @@ router.post('/login',async (req, res) => {
         })
     }
 
-    const token=jwt.sign({_id:user1._id, email:user1.email},process.env.TOKEN_SECRET||"secret")
+    const token=jwt.sign({_id:user1._id, cni:user1.cni,role:user.role},process.env.TOKEN_SECRET||"secret")
     res.cookie("jwt",token,{httpOnly:true,
         maxAge:24*60*60*1000//1 day
     })
-    res.send({
-        message:"Login Success"
-    });
+    const {password,...data}=await user1.toJSON()
+
+    res.status(200).send(data);
 })
 
 router.get("/user",async (req,res)=>{
@@ -43,8 +43,8 @@ router.get("/user",async (req,res)=>{
         if(!claims){
             return res.status(401).send({message:"invalid token"})
         }
-        const user = await user.findOne({_id:claims._id})
-        const {password,...data}=await user.toJSON()
+        const user1 = await user.findOne({_id:claims._id})
+        const {password,...data}=await user1.toJSON()
         return res.send(data)
     }catch(e){
         return res.status(401).send({message:"invalid token"})

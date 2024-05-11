@@ -17,7 +17,7 @@ export class AuthorizationGuard {
     if(this.appState.authState.roles.includes(route.data['requiredRoles'])){
       return true;
     } else {
-      this.router.navigateByUrl("/teacher/notAuthorized")
+      this.router.navigateByUrl("/notAuthorized")
       return false;
     }
   }
