@@ -15,6 +15,12 @@
         Bonjour et Bienvenue à l'Espace de Candidature de Cycle d'Ingénieur à l'ENSET Mohammedia
         <br>
         La période de pré-séléction se déroule du <span class="text-lime-500 font-bold">6 au 14 Mai 2024</span>
+  <p class="mb-8 lg:mb-16 p-8 font-light text-center text-white dark:text-gray-400 sm:text-xl">
+    Bonjour et Bienvenue à l'Espace de Candidature de Cycle d'Ingénieur à l'ENSET Mohammedia
+    <br>
+    La période de pré-sélection se déroule du <span class="font-bold" [ngClass]="{'text-red-500': isApplicationOver(), 'text-lime-500': !isApplicationOver()}">{{ DateInscription }}</span> 
+</p>
+
     <div>
         <form class="max-w-md mx-auto dark:bg-gray-900 dark:text-white" (ngSubmit)="sendForm()">
     <div class="relative z-0 w-full mb-5 group " style="display: none">

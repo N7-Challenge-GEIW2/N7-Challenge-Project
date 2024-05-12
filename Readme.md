@@ -1,45 +1,55 @@
-# Project Overview
+# N7 Challenge Project : AI, CyberSecurity and Blockchain to make an application for the management of students in Morocco
 
-This project aims to streamline the student application process at ENSET using innovative technologies like blockchain, artificial intelligence (AI), and cybersecurity. Our solution comprises two interconnected systems: one for teachers to securely record student information and another for students to apply to higher schools.
+### To start the  project 
 
-## Getting Started
+1. **first  navigate  to both the frontend  and run**
 
-### Frontend Setup
-1. Navigate to the frontend directory.
-2. Run `npm install` to install dependencies.
-3. Execute `ng serve` to start the frontend server.
-
-### Backend Setup
-1. Navigate to the backend directory.
-2. Install required packages by running `npm install --force`.
-3. Fill up the `.env` file with your information:
-
-```dotenv
-MONGO_URL="mongodb+srv://blockchain:blockchain@cluster.nszsxvk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster"
-USER: [Your Email for Notifications]
-PASS: [Your App Password] 
-PRIVATE_KEY: [Your Wallet Private Key] 
-API_URL: [Your Test Network URL]
-```
-
-### Contract Deployment
-1. Deploy the contracts and add their hashes by executing these commands:
 ```bash
-npx hardhat run --network ./scripts/studentManagementDeploy.js 
-npx hardhat run --network ./scripts/acceptedDeploy.js 
-npx hardhat run --network ./scripts/gouvernementDeploy.js 
-```
-2. The output will be a hash; put it in these variables:
+npm install 
 
-```dotenv
-student_contract_Address="[Student Contract Address]"
-governement_Contract_Address="[Government Contract Address]"
-accepted_system_contract="[System Contract Address]"
+ng serve
 ```
 
-### Running the Backend
-1. Run the backend server by executing `npm start`.
+2. **then  to run the  backend** 
 
----
+navigate to the backend and  run it but first install packages with :
 
-## BY : Digital Phantoms Team - N7 Challenge Hackathon
+```bash
+npm install --force
+``` 
+
+3. **then you need  to fill up the .env file  with your information**
+
+```bash
+MONGO_URL="mongodb+srv://blockchain:blockchain@cluster.nszsxvk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster"
+USER: your email for  sending the email to yourself after the  competition close
+PASS: your app password check tutorial https://www.youtube.com/watch?v=QDIOBsMBEI0&t=620s
+```
+
+**N.B** : PRIVATE_KEY: your wallet private key
+
+**N.B** : API_URL: your test network
+
+4. **now we need to deploy the  contracts  and add there hashes**
+
+use  these commands :
+    
+```bash
+npx hardhat run --network volta ./scripts/studentManagementDeploy.js
+npx hardhat run --network volta  ./scripts/acceptedDeploy.js
+npx hardhat run --network volta ./scripts/gouvernementDeploy.js
+```
+
+the output will be a hash put it in these variables :
+
+```bash
+student_contract_Address="student contract address"
+governement_Contract_Address="governement contract address"
+accepted_system_contract="system contract address"
+```
+
+5. **finally run the backend**
+
+```bash
+npm start
+```
