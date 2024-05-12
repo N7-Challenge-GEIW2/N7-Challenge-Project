@@ -99,7 +99,6 @@ router.post('/block-register',async (req, res) => {
 
 
 router.get('/student',async (req, res) => {
-
     try{      
           const token=req.cookies.jwt
         const claims=jwt.verify(token,process.env.TOKEN||"secret")
@@ -119,6 +118,9 @@ router.get('/student',async (req, res) => {
   });
 
 router.post('/verify-student/',async (req, res) => {
+    if(req.closeCompition){
+      return res.status(400).json({message:"Competition is closed"})
+    }
 
     try{      
         const {cni,major}=req.body;

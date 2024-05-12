@@ -2,19 +2,39 @@ const express = require('express');
 const app = express();
 const authRouter=require("./routers/auth.js")
 const teacherManageRouter=require("./routers/teacherManage.js")
+const schedule=require("node-schedule")
+const sendMail=require("./sendMail.js")
+require('dotenv').config();
 
 const mongoose=require("mongoose")
 const cookieParser=require("cookie-parser")
 const cors=require("cors")
 
-require('dotenv').config();
 
-mongoose.connect("mongodb+srv://blockchain:blockchain@cluster.nszsxvk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster").then(
+// the compition ending date
+const closingDate = new Date('2024-05-13T23:24:00');
+
+iscloseCompition=false
+schedule.scheduleJob(closingDate, () => {
+    iscloseCompition=true
+    sendMail() // send to the administrator email
+    console.log('Compition is closed')
+    //send email to me with list 
+  });
+
+
+
+mongoose.connect(process.env.MONGO_URL).then(
     ()=>{
         console.log("mongoose deployed")
     }
 )
 // Middleware to parse JSON request bodies
+app.use((req,res,next)=>{
+    req.closeCompition=iscloseCompition
+    console.log("is close compition :"+req.closeCompition)
+    next()
+})
 app.use(cookieParser())
 app.use(cors({
     credentials:true,
