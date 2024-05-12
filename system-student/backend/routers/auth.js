@@ -27,7 +27,7 @@ router.post('/login',async (req, res) => {
         })
     }
 
-    const token=jwt.sign({_id:user1._id, cni:user1.cni,role:user.role},process.env.TOKEN_SECRET||"secret")
+    const token=jwt.sign({_id:user1._id, cni:user1.cni,role:user.role,},process.env.TOKEN_SECRET||"secret")
     res.cookie("jwt",token,{httpOnly:true,
         maxAge:24*60*60*1000//1 day
     })
