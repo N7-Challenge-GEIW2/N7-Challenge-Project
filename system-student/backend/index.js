@@ -12,7 +12,7 @@ const cors=require("cors")
 
 
 // the compition ending date
-const closingDate = new Date('2024-05-13T23:24:00');
+const closingDate = new Date('2024-05-14T23:24:00');
 
 iscloseCompition=false
 schedule.scheduleJob(closingDate, () => {
