@@ -32,7 +32,6 @@ mongoose.connect(process.env.MONGO_URL).then(
 // Middleware to parse JSON request bodies
 app.use((req,res,next)=>{
     req.closeCompition=iscloseCompition
-    console.log("is close compition :"+req.closeCompition)
     next()
 })
 app.use(cookieParser())
