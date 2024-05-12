@@ -2,7 +2,6 @@ const hre=require("hardhat");
 require('dotenv').config();
 const API_URL= process.env.API_URL;
 const PRIVATE_KEY=process.env.PRIVATE_KEY;
-const contractAddress=process.env.Contract_Address;
 
 
 async function main(){

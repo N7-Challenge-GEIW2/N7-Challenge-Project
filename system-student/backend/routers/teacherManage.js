@@ -6,7 +6,7 @@ const fs=require("fs")
 require('dotenv').config();
 const API_URL= process.env.API_URL;
 const PRIVATE_KEY=process.env.PRIVATE_KEY;
-const contractAddress=process.env.Contract_Address;
+const student_contract_Address=process.env.student_contract_Address;
 const accepted_system_contract=process.env.accepted_system_contract;
 const governement_Contract_Address=process.env.governement_Contract_Address;
 
@@ -22,7 +22,7 @@ const acceptedSystemContractInstance = new ethers.Contract(accepted_system_contr
 
 // Student_Contract
 const {abi}=require("../artifacts/contracts/StudentManagementSystem.sol/StudentManagementSystem.json");
-const contractInstance = new ethers.Contract(contractAddress, abi, signer);
+const contractInstance = new ethers.Contract(student_contract_Address, abi, signer);
 
 
 // governement_Contract
