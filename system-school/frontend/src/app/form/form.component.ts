@@ -29,16 +29,6 @@ export class FormComponent {
         Swal.fire('Error', error.error.message||"Something wrong happend", 'error');
         this.errormsg = error.error.message;
       })
-    
-    try {
-      // Log the form data to the console
-      console.log(formData);
-      Swal.fire('Success', 'Candidature sent successfully!', 'success');
-      this.resetForm();
-    } catch (error) {
-      console.error('Failed to send email', error);
-      Swal.fire('Error', 'Failed to send candidature.', 'error');
-    }
   }
 
   resetForm(): void {
@@ -55,9 +45,9 @@ export class FormComponent {
 
     endDate: Date = new Date('2024-05-12T17:29:29');
     DateInscription: string = '6 au 14 Mai 2024';
-    
 
-  
+
+
   isApplicationOver(): boolean {
     const currentDate = new Date();
     if(currentDate.getTime() > this.endDate.getTime()) {
@@ -69,5 +59,5 @@ export class FormComponent {
     return false;
     }
   }
-  
+
 }
