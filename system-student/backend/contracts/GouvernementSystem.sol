@@ -24,7 +24,7 @@ contract GouvernementSystem {
         string memory _email,
         string memory _name
     ) public {
-        User storage newUser = users[_cni];
+        User storage newUser = users[_cne];
         newUser.cni = _cni;
         newUser.cne = _cne;
         newUser.email = _email;
@@ -33,11 +33,12 @@ contract GouvernementSystem {
 
 
         userCount++;
-        emit UserRegistered(_cni, _name);
+        emit UserRegistered(_cne, _name);
     }
 
     // Get user data
-    function getUser(string memory _cni) public view returns (User memory) {
-        return users[_cni];
+    function getUser(string memory _cne) public view returns (string memory, string memory, string memory, string memory) {
+        User memory user = users[_cne];
+        return (user.cni, user.cne, user.name, user.email);
     }
 }

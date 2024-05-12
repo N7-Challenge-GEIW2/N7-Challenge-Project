@@ -28,7 +28,7 @@ export class AuthService {
       return Promise.reject("Bad credentials");
     }
   }
-   
+
   async autologin(){
     try{
       let user:any= await firstValueFrom( this.http.get('http://localhost:3000/user' , {

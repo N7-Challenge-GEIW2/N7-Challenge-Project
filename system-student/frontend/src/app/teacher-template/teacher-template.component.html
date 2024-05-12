@@ -1,6 +1,16 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
   <div class="container">
+
+    <div *ngIf="errormsg" class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
+      <strong class="font-bold">{{errormsg}}</strong>
+      <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" data-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div *ngIf="successmsg" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+      <strong class="font-bold">{{successmsg}}</strong>
+      <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" data-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <div class="row">
       <div class="col-md-6 mx-auto cf-container">
         <form [formGroup]="studentForm" (ngSubmit)="saveStudent()">
@@ -45,51 +55,51 @@
             <div class="form-row row" *ngIf="showSemesterFields1()">
               <div class="col-md-6">
                 <label class="form-label">Semester1 Grade</label>
-                <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s1" type="number" placeholder="Enter Grade">
               </div>
               <div class="col-md-6">
                 <label class="form-label">Semester2 Grade</label>
-                <input class="form-control" formControlName="semester2" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s2" type="number" placeholder="Enter Grade">
               </div>
             </div>
             <div class="form-row row" *ngIf="showSemesterFields1()">
               <div class="col-md-6">
                 <label class="form-label">Semester3 Grade</label>
-                <input class="form-control" formControlName="semester3" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s3" type="number" placeholder="Enter Grade">
               </div>
               <div class="col-md-6">
                 <label class="form-label">Semester4 Grade</label>
-                <input class="form-control" formControlName="semester4" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s4" type="number" placeholder="Enter Grade">
               </div>
             </div>
             <div class="form-row row" *ngIf="showSemesterFields2()">
               <div class="col-md-6">
                 <label class="form-label">Semester1 Grade</label>
-                <input class="form-control" formControlName="semester1" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s1" type="number" placeholder="Enter Grade">
               </div>
               <div class="col-md-6">
                 <label class="form-label">Semester2 Grade</label>
-                <input class="form-control" formControlName="semester2" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s2" type="number" placeholder="Enter Grade">
               </div>
             </div>
             <div class="form-row row" *ngIf="showSemesterFields2()">
               <div class="col-md-6">
                 <label class="form-label">Semester3 Grade</label>
-                <input class="form-control" formControlName="semester3" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s3" type="number" placeholder="Enter Grade">
               </div>
               <div class="col-md-6">
                 <label class="form-label">Semester4 Grade</label>
-                <input class="form-control" formControlName="semester4" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s4" type="number" placeholder="Enter Grade">
               </div>
             </div>
             <div class="form-row row" *ngIf="showSemesterFields2()">
               <div class="col-md-6">
                 <label class="form-label">Semester5 Grade</label>
-                <input class="form-control" formControlName="semester5" placeholder="Enter Grade">
+                <input class="form-control" formControlName="s5" type="number" placeholder="Enter Grade">
               </div>
               <div class="col-md-6">
                 <label class="form-label">Semester6 Grade</label>
-                <input class="form-control" formControlName="semester6" placeholder="Enter Grade">
+                <input  class="form-control" formControlName="s6" type="number" placeholder="Enter Grade">
               </div>
             </div>
             <div class="form-row row">

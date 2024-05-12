@@ -13,6 +13,8 @@ export class TeacherTemplateComponent implements OnInit {
   public studentForm!: FormGroup;
   public showFourSemesterFields: boolean = false;
   public showSixSemesterFields: boolean = false;
+  errormsg: any;
+  successmsg: any;
 
   public extractedText: string = ''; // Propriété pour stocker le texte extrait
   public imageUrl?: string; // Optional property to store image URL (can be null)
@@ -25,12 +27,12 @@ export class TeacherTemplateComponent implements OnInit {
       major: this.formBuilder.control('', [Validators.required]),
       schoolName: this.formBuilder.control('', [Validators.required]),
       degreeType: this.formBuilder.control('', [Validators.required]),
-      semester1: this.formBuilder.control(0, [Validators.required]),
-      semester2: this.formBuilder.control(0, [Validators.required]),
-      semester3: this.formBuilder.control(0, [Validators.required]),
-      semester4: this.formBuilder.control(0, [Validators.required]),
-      semester5: this.formBuilder.control(0, [Validators.required]),
-      semester6: this.formBuilder.control(0, [Validators.required])
+      s1: this.formBuilder.control(0, [Validators.required]),
+      s2: this.formBuilder.control(0, [Validators.required]),
+      s3: this.formBuilder.control(0, [Validators.required]),
+      s4: this.formBuilder.control(0, [Validators.required]),
+      s5: this.formBuilder.control(0, [Validators.required]),
+      s6: this.formBuilder.control(0, [Validators.required])
     });
   }
 
@@ -39,9 +41,12 @@ export class TeacherTemplateComponent implements OnInit {
     this.studentService.saveStudent(student).subscribe({
       next: data => {
         alert(JSON.stringify(data));
+        this.successmsg = 'Student saved successfully!';
+        this.studentForm.reset();
       },
       error: error => {
         console.log(error);
+        this.errormsg = error.message;
       }
     });
   }
@@ -51,17 +56,17 @@ export class TeacherTemplateComponent implements OnInit {
     this.showFourSemesterFields = (value == 'DEUG' || value == 'DEUST' || value == 'DUT');
     this.showSixSemesterFields = (value == 'LICENCE');
     if (this.showFourSemesterFields) {
-      this.studentForm.get('semester1')?.reset();
-      this.studentForm.get('semester2')?.reset();
-      this.studentForm.get('semester3')?.reset();
-      this.studentForm.get('semester4')?.reset();
+      this.studentForm.get('s1')?.reset();
+      this.studentForm.get('s2')?.reset();
+      this.studentForm.get('s3')?.reset();
+      this.studentForm.get('s4')?.reset();
     } else if(this.showSixSemesterFields) {
-      this.studentForm.get('semester1')?.reset();
-      this.studentForm.get('semester2')?.reset();
-      this.studentForm.get('semester3')?.reset();
-      this.studentForm.get('semester4')?.reset();
-      this.studentForm.get('semester5')?.reset();
-      this.studentForm.get('semester6')?.reset();
+      this.studentForm.get('s1')?.reset();
+      this.studentForm.get('s2')?.reset();
+      this.studentForm.get('s3')?.reset();
+      this.studentForm.get('s4')?.reset();
+      this.studentForm.get('s5')?.reset();
+      this.studentForm.get('s6')?.reset();
     }
   }
 
@@ -101,6 +106,6 @@ export class TeacherTemplateComponent implements OnInit {
       }
     );
   }
-  
+
   }
-  
+

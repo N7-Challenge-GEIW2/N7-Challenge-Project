@@ -11,7 +11,7 @@ export class StudentService {
   constructor(private http: HttpClient) { }
 
   public getStudents(){
-    return this.http.get<Student[]>(`${this.host}/students`);
+    return this.http.get<Student[]>(`${this.host}/students`,{withCredentials: true});
   }
 
   saveStudent(student: Student):Observable<Student> {

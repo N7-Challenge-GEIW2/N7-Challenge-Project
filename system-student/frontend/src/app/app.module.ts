@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AppHttpInterceptor} from "./services/app-http.interceptor";
 import { TeacherTemplateComponent } from './teacher-template/teacher-template.component';
+import {NgIf} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -23,13 +24,14 @@ import { TeacherTemplateComponent } from './teacher-template/teacher-template.co
     StudentTemplateComponent,
     TeacherTemplateComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgIf
+    ],
   providers: [
     {provide : HTTP_INTERCEPTORS, useClass : AppHttpInterceptor, multi : true}
   ],

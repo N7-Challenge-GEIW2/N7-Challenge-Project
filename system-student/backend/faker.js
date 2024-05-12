@@ -40,19 +40,19 @@ async function populateUsers(numUsers) {
   }
   // register younes,anas,nohayla change this later
   const users = [{
-    cni: "anas",
-    cne: "12345678",
+    cni: "JC55555",
+      cne: "D12345678",
     name: "anas",
     email: "anas@gmail.com"
   },
   {
-    cni: "younes",
-    cne: "87654321",
+    cni: "JC444444",
+    cne: "D87654321",
     name: "younes",
     email: "younes@gmail.com"
   },
   {
-    cni: "nohayla",
+    cni: "JC44444",
     cne: "7984",
     name: "nohayla",
     email: "nohayla@gmail.com"
@@ -63,4 +63,4 @@ async function populateUsers(numUsers) {
 }
 
 // Example usage: Populate the contract with 10 fake users
-populateUsers(3);
+populateUsers(0);

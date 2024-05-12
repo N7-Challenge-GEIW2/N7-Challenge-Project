@@ -1,5 +1,7 @@
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 20px;
 }

@@ -33,12 +33,12 @@ const gouvernementContractInstance = new ethers.Contract(governement_Contract_Ad
 
 
 
-router.post('/block-register',async (req, res) => {  
+router.post('/students',async (req, res) => {
     try{
   
         // Access the request body
       const {
-        cni,
+        cne,
         schoolName,
         degreeType,
         major,
@@ -46,25 +46,33 @@ router.post('/block-register',async (req, res) => {
         s2,
         s3,s4,s5,s6
       } = req.body;  
-      const scores=[s1,s2,s3,s4,s5,s6];
+      const scores=standardScore([s1,s2,s3,s4,s5,s6]);
 
         // Create a new student  from governament data
-        const student=await gouvernementContractInstance.getStudent(cni);
+        const student=await gouvernementContractInstance.getUser(cne);
+        console.log(student);
         if(student.length==0||student[0]==""||student[1]==""||student[2]==""||student[3]==""){
             return res.status(400).json({ message: 'Student not found' });
         }
-
+       // const studentCl=await contractInstance.getStudent(student[0]);
+       //  if(studentCl[0]!=""||studentCl[1]!=""){
+       //      return res.status(400).json({ message: 'Student already registered found' });
+       //  }
         let tx=await contractInstance.registerStudent(student[0],student[1],student[2],student[3]);
         await tx.wait();
-
 
         // add the degree to the student
          tx=await contractInstance.addDegree(cne,schoolName,degreeType,major,scores);
         await tx.wait();
-        return     res.status(201).json({ message: 'Student registered successfully', student:{cni,cne,name,email} });
+        const studentClz=await contractInstance.getStudent(student[0]);
+        console.log("==============================")
+        console.log(studentClz);
+        console.log("==============================")
+
+        return     res.status(201).json({ message: 'Student registered successfully'});
     }catch(err){
         console.log(err);
-        return     res.status(400).json({ message: 'Invalid ', student });
+        return     res.status(400).json({ message: 'Invalid ' });
     } 
     // Here, you can save the student object to a database or perform any other necessary operations
     // Send a response
@@ -73,7 +81,7 @@ router.post('/block-register',async (req, res) => {
 
 
 
-router.get('/student',async (req, res) => {
+router.get('/students',async (req, res) => {
     try{      
           const token=req.cookies.jwt
         const claims=jwt.verify(token,process.env.TOKEN||"secret")
@@ -83,7 +91,7 @@ router.get('/student',async (req, res) => {
         cni=claims.cni;
         const student=await contractInstance.getStudent(cni);
         
-        return     res.status(201).json(convertStudentDataToObject(student));
+        return     res.status(201).json([convertStudentDataToObject(student)]);
     }catch(err){
         console.log(err);
         return     res.status(400).json({ message: 'Invalid ' });
@@ -94,7 +102,7 @@ router.get('/student',async (req, res) => {
 
 router.post('/verify-student/',async (req, res) => {
     if(req.closeCompition){
-      return res.status(400).json({message:"Competition is closed"})
+      return res.status(400).json({message:"Competition is closed, Come back next year"})
     }
 
     try{      
@@ -103,17 +111,36 @@ router.post('/verify-student/',async (req, res) => {
           return res.status(400).json({message:"Invalid cni"})
         }
         const student=await contractInstance.getStudent(cni);
+
         let studentObject= convertStudentDataToObject(student)
+        console.log("==============================")
+        console.log(studentObject);
+        console.log("==============================")
         if(studentObject.cne==""){
             return res.status(400).json({message:"Student not found"})
         }
-        if (studentObject.degreeType=="Lience",calculateStudentAverage(studentObject)<10){
+        if (studentObject.degreeType==="DEUG" && calculateStudentAverage(studentObject)<12){
             return res.status(400).json({message:"Student not allowed to register"})
         }
-        // else  allow him to register 
+        if (studentObject.degreeType==="LICENCE"){
+            return res.status(400).json({message:"Student not allowed to register"})
+        }
+        if (studentObject.degreeType==="DEUST" && calculateStudentAverage(studentObject)<15){
+            return res.status(400).json({message:"Student not allowed to register"})
+        }
+        if (studentObject.degreeType==="DUT" && calculateStudentAverage(studentObject)<16){
+            return res.status(400).json({message:"Student not allowed to register"})
+        }
+        // else  allow him to register
+
+
         const {name,email,cne}=studentObject;
-         const tx=await acceptedSystemContractInstance.registerUser(cni,cne,email,name,major,{gasLimit: 8000000});
+        console.log("studentObject")
+        console.log(cni,cne,email,name,major)
+         const tx=await acceptedSystemContractInstance.registerUser(cni,cne,email,name,major);
+
         await tx.wait();
+
         // register in a csv file 
         const csvData = `${name},${email},${cne},${cni},${major}\n`;
         fs.appendFileSync('files/data.csv', csvData);
@@ -129,21 +156,22 @@ router.post('/verify-student/',async (req, res) => {
 
 
 function convertStudentDataToObject(studentData) {
-    console.log(studentData);
+
     const student= studentData.flat(Infinity)
 
     let studentObject={
-      cne:student[0],
-      cni:student[1],
-      name:student[2],
-      email:student[3],
-      schoolName:student[4],
-      degreeType:student[5],
+        cni:student[0],
+        cne:student[1],
+      email:student[2],
+      name:student[3],
+        degreeType :student[4],
+        schoolName:student[5],
       major:student[6],
       
     }
+
     for (let i = 7; i < student.length; i++) {
-      studentObject["semester" + (i-6 )] = student[i].toNumber();
+      studentObject["semester" + (i-6 )] =parseInt(student[i]._hex, 16)/100;
     }
     return studentObject
   } 
@@ -151,4 +179,9 @@ function convertStudentDataToObject(studentData) {
 function calculateStudentAverage({semester1,semester2,semester3,semester4}){
     return (semester1+semester2+semester3+semester4)/4;
 }
+
+function standardScore(arr){
+    return arr.map((x)=>x*100)
+}
+
 module.exports = router;

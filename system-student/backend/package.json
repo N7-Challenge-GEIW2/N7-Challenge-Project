@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "faker": "node faker"
       },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",

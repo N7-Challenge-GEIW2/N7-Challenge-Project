@@ -1,6 +1,7 @@
 export interface Student {
   cni: string;
   cne: string;
+  name: string;
   password: string;
   major: string;
   schoolName: string;
