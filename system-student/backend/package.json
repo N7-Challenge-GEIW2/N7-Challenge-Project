@@ -1,4 +1,10 @@
 {
+  "name": "frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+      },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
