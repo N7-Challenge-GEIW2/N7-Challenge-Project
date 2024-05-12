@@ -24,12 +24,10 @@ def upload():
     if file.filename == '':
         return jsonify({'error': 'No file selected'}), 400
 
-    # Ouvrir l'image avec OpenCV
     img_np = np.frombuffer(file.read(), np.uint8)
-    file.seek(0)  # Positionner le flux à la position du début du fichier
+    file.seek(0) 
     img = cv2.imdecode(img_np, cv2.IMREAD_UNCHANGED)
 
-    # Appliquer votre modèle sur l'image
     height, width, _ = img.shape
     config = r'--psm 6'
     boxes = pytesseract.image_to_data(img, config=config, output_type=Output.DICT)

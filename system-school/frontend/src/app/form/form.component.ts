@@ -13,7 +13,6 @@ export class FormComponent {
 
   constructor(private http: HttpClient) { }
   sendForm(): void {
-    // Retrieve the form data
     const formData = {
       fullname: (document.getElementById('_candidate_fullname') as HTMLInputElement).value,
       email: (document.getElementById('candidate_email') as HTMLInputElement).value,
@@ -31,11 +30,9 @@ export class FormComponent {
       })
   }
   resetForm(): void {
-    // Reset the values of the input fields to empty strings
     (document.getElementById('_candidate_fullname') as HTMLInputElement).value = '';
     (document.getElementById('candidate_email') as HTMLInputElement).value = '';
     (document.getElementById('candidate_cne') as HTMLInputElement).value = '';
-
     // Uncheck any checked radio buttons in the 'major' group
     const checkedRadioButton = document.querySelector('input[name="major"]:checked') as HTMLInputElement;
     if (checkedRadioButton) {

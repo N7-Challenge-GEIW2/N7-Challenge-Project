@@ -16,8 +16,8 @@ export class TeacherTemplateComponent implements OnInit {
   errormsg: any;
   successmsg: any;
 
-  public extractedText: string = ''; // Propriété pour stocker le texte extrait
-  public imageUrl?: string; // Optional property to store image URL (can be null)
+  public extractedText: string = ''; 
+  public imageUrl?: string;
 
   constructor(private formBuilder: FormBuilder, private studentService: StudentService, private http: HttpClient) { }
 
@@ -98,7 +98,7 @@ export class TeacherTemplateComponent implements OnInit {
       (response) => {
         console.log('Texte extrait:', response.extracted_text);
         this.imageUrl = 'data:image/png;base64,' + response.image_base64;
-        this.extractedText = response.extracted_text; // Mettre à jour le texte extrait
+        this.extractedText = response.extracted_text; 
         // console.log(this.extractedText);
       },
       (error) => {
