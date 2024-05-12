@@ -7,24 +7,30 @@ require('dotenv').config();
 const API_URL= process.env.API_URL;
 const PRIVATE_KEY=process.env.PRIVATE_KEY;
 const contractAddress=process.env.Contract_Address;
+const accepted_system_contract=process.env.accepted_system_contract;
+const governement_Contract_Address=process.env.governement_Contract_Address;
+
 
 const provider = new ethers.providers.JsonRpcProvider(API_URL);
-console.log(PRIVATE_KEY,provider)
 const signer = new ethers.Wallet(PRIVATE_KEY,provider);
+
+// Accepted_System_Contract
+const {abi:acceptedSystemAbi}=require("../artifacts/contracts/AcceptedSystem.sol/AcceptedSystem.json");
+console.log("system is this :"+accepted_system_contract,acceptedSystemAbi)
+const acceptedSystemContractInstance = new ethers.Contract(accepted_system_contract, acceptedSystemAbi, signer);
+
+
+// Student_Contract
 const {abi}=require("../artifacts/contracts/StudentManagementSystem.sol/StudentManagementSystem.json");
 const contractInstance = new ethers.Contract(contractAddress, abi, signer);
 
 
 // governement_Contract
-const governement_Contract_Address=process.env.governement_Contract_Address;
-const {abi:gouvernementAbi}=require("./artifacts/contracts/GouvernementSystem.sol/GouvernementSystem.json");
+const {abi:gouvernementAbi}=require("../artifacts/contracts/GouvernementSystem.sol/GouvernementSystem.json");
 const gouvernementContractInstance = new ethers.Contract(governement_Contract_Address, gouvernementAbi, signer);
 
 
-// Accepted_System_Contract
-const accepted_system_contract=process.env.accepted_system_contract;
-const {abi:gouvernementAbi}=require("./artifacts/contracts/accepetedSystem.sol/acceptedSystem.json");
-const acceptedSystemContractInstance = new ethers.Contract(accepted_system_contract, gouvernementAbi, signer);
+
 
 
 router.post('/block-register',async (req, res) => {  
@@ -124,16 +130,16 @@ router.post('/verify-student/',async (req, res) => {
         if(studentObject.cne==""){
             return res.status(400).json({message:"Student not found"})
         }
-        if (studentObject.degreeType=="DEUG",calculateStudentAverage(studentObject)<10){
+        if (studentObject.degreeType=="Lience",calculateStudentAverage(studentObject)<10){
             return res.status(400).json({message:"Student not allowed to register"})
         }
         // else  allow him to register 
         const {name,email,cne}=studentObject;
-         const tx=await acceptedSystemContractInstance.addStudent(cni,cne,email,name,major);
+         const tx=await acceptedSystemContractInstance.registerUser(cni,cne,email,name,major,{gasLimit: 8000000});
         await tx.wait();
         // register in a csv file 
         const csvData = `${name},${email},${cne},${cni},${major}\n`;
-        fs.appendFileSync('file/data.csv', csvData);
+        fs.appendFileSync('files/data.csv', csvData);
         return     res.status(201).json({ message: 'Student registered successfully', student:{cni,cne,name,email} });
 
     }catch(err){

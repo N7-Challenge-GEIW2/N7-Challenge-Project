@@ -2,7 +2,6 @@ const hre=require("hardhat");
 require('dotenv').config();
 const API_URL= process.env.API_URL;
 const PRIVATE_KEY=process.env.PRIVATE_KEY;
-const accepted_system_contract=process.env.accepted_system_contract;
 
 
 async function main(){
@@ -12,7 +11,7 @@ const AcceptedSystem=await hre.ethers.getContractFactory("AcceptedSystem",signer
 const acceptedSystem=await AcceptedSystem.deploy();
 await acceptedSystem.deployed();
 
-console.log("StudentManagementSystem deployed to:",acceptedSystem.address);
+console.log("AcceptedSystem deployed to:",acceptedSystem.address);
 
 
 }

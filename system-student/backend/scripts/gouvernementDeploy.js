@@ -12,7 +12,7 @@ const GouvernementSystem=await hre.ethers.getContractFactory("GouvernementSystem
 const gouvernementSystem=await GouvernementSystem.deploy();
 await gouvernementSystem.deployed();
 
-console.log("StudentManagementSystem deployed to:",gouvernementSystem.address);
+console.log("GouvernementSystem deployed to:",gouvernementSystem.address);
 
 
 }
