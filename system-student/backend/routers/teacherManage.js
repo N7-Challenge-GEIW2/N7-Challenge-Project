@@ -6,7 +6,7 @@ const fs=require("fs")
 require('dotenv').config();
 const API_URL= process.env.API_URL;
 const PRIVATE_KEY=process.env.PRIVATE_KEY;
-const student_contract_Address=process.env.student_contract_Address;
+const student_system_contract=process.env.student_system_contract;
 const accepted_system_contract=process.env.accepted_system_contract;
 const governement_Contract_Address=process.env.governement_Contract_Address;
 
@@ -22,7 +22,7 @@ const acceptedSystemContractInstance = new ethers.Contract(accepted_system_contr
 
 // Student_Contract
 const {abi}=require("../artifacts/contracts/StudentManagementSystem.sol/StudentManagementSystem.json");
-const contractInstance = new ethers.Contract(student_contract_Address, abi, signer);
+const contractInstance = new ethers.Contract(student_system_contract, abi, signer);
 
 
 // governement_Contract
@@ -71,31 +71,6 @@ router.post('/block-register',async (req, res) => {
   });
   
 
-  
-// router.post('/add-degree',async (req, res) => {
-    
-//     try{
-//     const {
-//         cne,
-//         schoolName,
-//         degreeType,
-//         major,
-//         s1,
-//         s2,
-//         s3,s4,s5,s6
-//       } = req.body;
-//         const scores=[s1,s2,s3,s4,s5,s6];
-//         console.log(scores)
-//         const tx=await contractInstance.addDegree(cne,schoolName,degreeType,major,scores);
-//         await tx.wait();
-//         return     res.status(201).json({ message: 'Student degree added successfully' });
-//     }catch(err){
-//         console.log(err);
-//         return     res.status(400).json({ message: 'Invalid ' });
-//     } 
-//     // Here, you can save the student object to a database or perform any other necessary operations
-//     // Send a response
-//   });
 
 
 router.get('/student',async (req, res) => {
@@ -153,13 +128,6 @@ router.post('/verify-student/',async (req, res) => {
   });
 
 
-
-
-
-
-function hexToDecimal(hex) {
-    return parseInt(hex, 16);
-}
 function convertStudentDataToObject(studentData) {
     console.log(studentData);
     const student= studentData.flat(Infinity)
