@@ -1,36 +1,167 @@
 <app-navbar></app-navbar>
 
-<div class="p-3">
-  <div class="card">
-    <div class="card-body">
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="text-center">CNE</th>
-          <th class="text-center">CNI</th>
-          <th class="text-center">Major</th>
-          <th class="text-center">Semester1</th>
-          <th class="text-center">Semester2</th>
-          <th class="text-center">Semester3</th>
-          <th class="text-center">Semester4</th>
-          <th class="text-center">Semester5</th>
-          <th class="text-center">Semester6</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let student of students">
-          <td class="text-center">{{student.cne}}</td>
-          <td class="text-center">{{student.cni}}</td>
-          <td class="text-center">{{student.major}}</td>
-          <td class="text-center">{{student.semester1}}</td>
-          <td class="text-center">{{student.semester2}}</td>
-          <td class="text-center">{{student.semester3}}</td>
-          <td class="text-center">{{student.semester4}}</td>
-          <td class="text-center">{{student.semester5}}</td>
-          <td class="text-center">{{student.semester6}}</td>
-        </tr>
-        </tbody>
-      </table>
+<div class="flex-container m-5">
+  <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center justify-between mb-4">
+      <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">General Information</h5>
+    </div>
+    <div class="flow-root">
+      <ul *ngFor="let student of students" role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Name
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              smito
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                CNE
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.cne }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                CNI
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.cni }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Major
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.major }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                School Name
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.schoolName }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Degree Type
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.degreeType }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center justify-between mb-4">
+      <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Semesters Grade</h5>
+    </div>
+    <div class="flow-root">
+      <ul *ngFor="let student of students" role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Semester 1
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.semester1 }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Semester 2
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.semester2 }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Semester 3
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.semester3 }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Semester 4
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.semester4 }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Semester 5
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.semester5 }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                Semester 6
+              </p>
+            </div>
+            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              {{ student.semester6 }}
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

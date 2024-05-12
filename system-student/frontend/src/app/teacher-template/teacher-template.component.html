@@ -98,12 +98,17 @@
                   <textarea id="message" formControlName="extractedText" readonly rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Extracted Text ...">
                     {{ extractedText }}
                   </textarea>
-                  
+                  <img [src]="imageUrl" *ngIf="imageUrl" alt="Image avec rectangles et textes encadrés en couleur" class="img-fluid img-thumbnail">
+                </div>
+                <div class="form-row row">
+                  <div class="col-md-12 d-flex justify-content-center">
+                    <button [disabled]="studentForm.invalid" type="submit" class="btn btn-primary col-md-5">Save</button>
+                    &nbsp;
+                    &nbsp;
+                    <button class="btn btn-primary col-md-5" (click)="onUploadClick()">Upload</button>
+                  </div>
+                </div>
 
-                <img [src]="imageUrl" *ngIf="imageUrl" alt="Image avec rectangles et textes encadrés en couleur" class="img-fluid img-thumbnail">
-              </div>
-                <button [disabled]="studentForm.invalid" type="submit" class="btn btn-primary w-50">Save</button>
-                <button class="btn btn-primary w-50" (click)="onUploadClick()">Upload</button>
               </div>
             </div>
           </div>
