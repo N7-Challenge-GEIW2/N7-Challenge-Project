@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -15,8 +14,7 @@ export class LoginComponent implements OnInit{
 
   constructor(private fb : FormBuilder,
               private router : Router,
-              private http : HttpClient,
-            private authService:AuthService) { }
+              private authService:AuthService) { }
 
   ngOnInit() {
     this.formLogin=this.fb.group({
@@ -37,5 +35,4 @@ export class LoginComponent implements OnInit{
       }
     });
   }
-
 }
